@@ -1,15 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:seoul/models/post.dart';
+import 'package:seoul/models/post_response.dart';
 import 'package:seoul/services/post_service.dart';
 
 final postServiceProvider = Provider<PostService>((ref) => PostService());
 
-final postListProvider = StateNotifierProvider<PostListNotifier, List<Post>>((ref) {
+final postListProvider = StateNotifierProvider<PostListNotifier, List<PostResponse>>((ref) {
   final postService = ref.read(postServiceProvider);
   return PostListNotifier(postService);
 });
 
-class PostListNotifier extends StateNotifier<List<Post>> {
+class PostListNotifier extends StateNotifier<List<PostResponse>> {
   final PostService _postService;
   int? _cursor;
   bool _isFetching = false;

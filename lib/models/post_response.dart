@@ -1,4 +1,4 @@
-class Post {
+class PostResponse {
   final int id;
   final String? content;
   final String nickname;
@@ -8,7 +8,7 @@ class Post {
   final int commentCnt;
   final int userId;
 
-  Post({
+  PostResponse({
     required this.id,
     required this.content,
     required this.nickname,
@@ -20,8 +20,8 @@ class Post {
 
   });
 
-  factory Post.fromJson(Map<String, dynamic> json){
-    return Post(
+  factory PostResponse.fromJson(Map<String, dynamic> json){
+    return PostResponse(
       id: json['id'],
       content: json['content'] as String?,
       nickname: json['nickname'] as String,

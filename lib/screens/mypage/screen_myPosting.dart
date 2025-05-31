@@ -71,7 +71,7 @@ class MyPosting extends StatelessWidget {
                   return PostBubble(
                     userDetail.photoUrl,
                     userDetail.nickname,
-                    boardId,
+                    boardId as int,
                     board.userId,
                     board.body,
                     board.likeCnt,

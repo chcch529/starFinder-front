@@ -1,7 +1,7 @@
-import 'package:seoul/models/post.dart';
+import 'package:seoul/models/post_response.dart';
 
 class CursorResponse {
-  final List<Post> content;
+  final List<PostResponse> content;
   final bool hasNext;
   final int? nextCurosr;
 
@@ -14,7 +14,7 @@ class CursorResponse {
   factory CursorResponse.fromJson(Map<String, dynamic> json){
     return CursorResponse(
       content: (json['content'] as List)
-          .map((e) => Post.fromJson(e))
+          .map((e) => PostResponse.fromJson(e))
           .toList(),
       hasNext: json['hasNext'],
       nextCurosr: json['nextCursor']
