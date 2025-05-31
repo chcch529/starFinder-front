@@ -32,7 +32,7 @@ class PostService {
       body: jsonEncode(postRequest)
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       print('게시글 생성 성공: ${response.body}');
     } else {
       throw Exception('게시글을 생성하는 데 실패했습니다');

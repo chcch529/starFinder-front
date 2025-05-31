@@ -72,7 +72,7 @@ class MyPosting extends StatelessWidget {
                     userDetail.photoUrl,
                     userDetail.nickname,
                     boardId as int,
-                    board.userId,
+                    board.userId as int,
                     board.body,
                     board.likeCnt,
                     board.commentCnt,

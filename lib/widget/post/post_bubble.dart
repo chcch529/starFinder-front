@@ -26,7 +26,7 @@ class PostBubble extends StatelessWidget {
   final String? photoUrl;
   final String nickname;
   final int boardId;
-  final String userId;
+  final int userId;
   final String? body;
   final int likeCnt;
   final int commentCnt;
@@ -335,7 +335,7 @@ class PostBubble extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => CommentScreen(
                         boardId: boardId,
-                        postedUid: userId,
+                        postedUid: userId as String,
                       ),
                     ),
                   );
@@ -376,7 +376,7 @@ class PostBubble extends StatelessWidget {
                     )
                   : TextButton(
                       onPressed: () {
-                        startChat(context, userId);
+                        startChat(context, userId as String);
                       },
                       child: Text(
                         '채팅하기',

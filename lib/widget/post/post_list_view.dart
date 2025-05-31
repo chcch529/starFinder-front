@@ -1,15 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:seoul/providers/post_provider.dart';
 import 'package:seoul/widget/post/post_bubble.dart';
-
-import '../../models/model_board.dart';
-import '../../models/model_userDetail.dart';
 
 class PostListView extends ConsumerStatefulWidget {
   const PostListView( {super.key});
@@ -59,10 +52,10 @@ class PostListView extends ConsumerStatefulWidget {
               post.profileUrl,
               post.nickname,
               post.id,
-              "",
+              post.userId,
               post.content,
-              0,
-              0,
+              post.likeCnt,
+              post.commentCnt,
               post.createdAt,
               null);
         },
