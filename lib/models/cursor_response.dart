@@ -3,12 +3,12 @@ import 'package:seoul/models/post_response.dart';
 class CursorResponse {
   final List<PostResponse> content;
   final bool hasNext;
-  final int? nextCurosr;
+  final int? nextCursor;
 
   CursorResponse({
     required this.content,
     required this.hasNext,
-    this.nextCurosr
+    this.nextCursor
   });
 
   factory CursorResponse.fromJson(Map<String, dynamic> json){
@@ -17,7 +17,7 @@ class CursorResponse {
           .map((e) => PostResponse.fromJson(e))
           .toList(),
       hasNext: json['hasNext'],
-      nextCurosr: json['nextCursor']
+        nextCursor: json['nextCursor']
     );
   }
 }
