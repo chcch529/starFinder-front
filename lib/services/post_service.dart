@@ -1,7 +1,11 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import '../models/cursor_response.dart';
+
 class PostService {
 
   Future<CursorResponse> fetchPosts({int? cursor, int size = 10}) async {
-    final uri = Uri.parse('https://localhost:8080/api/posts').replace(
+    final url = Uri.parse('https://localhost:8080/api/posts').replace(
         queryParameters: {
           if (cursor != null) 'cursor': '$cursor',
           'size': '$size'
