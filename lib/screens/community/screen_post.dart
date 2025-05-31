@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:seoul/screens/community/screen_newPost.dart';
+import 'package:seoul/screens/community/screen_create_post.dart';
 import 'package:seoul/widget/bottombar/bottom_bar.dart';
 import 'package:seoul/widget/post/post_list_view.dart';
 import 'package:provider/provider.dart';
@@ -107,7 +107,7 @@ class _PostScreenState extends State<PostScreen> {
                   } else {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => newPostScreen())
+                        MaterialPageRoute(builder: (context) => CreatePostScreen())
                     );
                   }
                 },

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seoul/screens/chat/screen_chatroom.dart';
-import 'package:seoul/screens/community/screen_newPost.dart';
+import 'package:seoul/screens/community/screen_create_post.dart';
 import 'package:seoul/screens/community/screen_post.dart';
 import 'package:seoul/screens/login/screen_findIdPw.dart';
 import 'package:seoul/screens/mypage/set_info.dart';
