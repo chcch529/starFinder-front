@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:seoul/screens/community/screen_newPost.dart';
+import 'package:seoul/screens/community/screen_create_post.dart';
 import 'package:seoul/widget/bottombar/bottom_bar.dart';
-import 'package:seoul/widget/post/post_content.dart';
+import 'package:seoul/widget/post/post_list_view.dart';
 import 'package:provider/provider.dart';
 
 class PostScreen extends StatefulWidget {
@@ -54,7 +54,7 @@ class _PostScreenState extends State<PostScreen> {
         children: [
           Positioned(
             bottom: 100, left: 0, right: 0, top: 0,
-            child: Content()
+            child: PostListView()
           ),
           Positioned(
             bottom: 120, right: 25,
@@ -107,7 +107,7 @@ class _PostScreenState extends State<PostScreen> {
                   } else {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => newPostScreen())
+                        MaterialPageRoute(builder: (context) => CreatePostScreen())
                     );
                   }
                 },

@@ -23,11 +23,11 @@ class PostBubble extends StatelessWidget {
       this.uploadImageUrls,
       {super.key});
 
-  final String photoUrl;
+  final String? photoUrl;
   final String nickname;
-  final String boardId;
-  final String userId;
-  final String body;
+  final int boardId;
+  final int userId;
+  final String? body;
   final int likeCnt;
   final int commentCnt;
   final DateTime? createdAt;
@@ -149,8 +149,8 @@ class PostBubble extends StatelessWidget {
     }
   }
 
-  void incrementLikeCount(String boardId) {
-    final docRef = FirebaseFirestore.instance.collection('board').doc(boardId);
+  void incrementLikeCount(int boardId) {
+    final docRef = FirebaseFirestore.instance.collection('board').doc(boardId as String?);
 
     FirebaseFirestore.instance
         .runTransaction((transaction) async {
@@ -190,7 +190,7 @@ class PostBubble extends StatelessWidget {
         children: [
           Row(
             children: [
-              buildUserProfileAvatar(photoUrl, 25), // 프사
+              buildUserProfileAvatar(photoUrl!, 25), // 프사
               SizedBox(
                 width: 10,
               ),
@@ -215,7 +215,7 @@ class PostBubble extends StatelessWidget {
             margin: EdgeInsets.fromLTRB(0,20,0,0),
             child: Text(
               textAlign: TextAlign.left,
-              body,
+              body!,
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w700,
@@ -335,7 +335,7 @@ class PostBubble extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => CommentScreen(
                         boardId: boardId,
-                        postedUid: userId,
+                        postedUid: userId as String,
                       ),
                     ),
                   );
@@ -362,7 +362,7 @@ class PostBubble extends StatelessWidget {
                       onPressed: () {
                         FirebaseFirestore.instance
                             .collection('board')
-                            .doc(boardId)
+                            .doc(boardId as String?)
                             .delete();
                       },
                       child: Text(
@@ -376,7 +376,7 @@ class PostBubble extends StatelessWidget {
                     )
                   : TextButton(
                       onPressed: () {
-                        startChat(context, userId);
+                        startChat(context, userId as String);
                       },
                       child: Text(
                         '채팅하기',

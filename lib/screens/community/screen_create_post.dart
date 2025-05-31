@@ -5,20 +5,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:io';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:seoul/models/post_request.dart';
 import 'package:seoul/screens/community/screen_comment.dart';
 import 'package:seoul/screens/community/screen_post.dart';
 
 import '../../models/model_board.dart';
+import '../../providers/post_provider.dart';
+import '../../services/post_service.dart';
 
-class newPostScreen extends StatefulWidget {
-  const newPostScreen({super.key});
+class CreatePostScreen extends ConsumerStatefulWidget {
+  const CreatePostScreen({super.key});
   @override
-  State<newPostScreen> createState() => _newPostScreen();
+  ConsumerState<CreatePostScreen> createState() => _createPostScreen();
 }
 
-class _newPostScreen extends State<newPostScreen> {
+class _createPostScreen extends ConsumerState<CreatePostScreen> {
   final uid = FirebaseAuth.instance.currentUser!.uid;
   bool showSpinner = false;
 
@@ -61,20 +65,47 @@ class _newPostScreen extends State<newPostScreen> {
     return imageUrls;
   }
 
+  // void _sendPost() async {
+  //   setState(() {
+  //     showSpinner = true;
+  //   });
+  //   try {
+  //     List<String> imageUrls = await uploadImages();
+  //     FirebaseFirestore.instance.collection('board').add({
+  //       'userId': uid,
+  //       'body': _bodyController.text,
+  //       'uploadImageUrls': imageUrls,
+  //       'createdAt': DateTime.now(),
+  //       'likeCnt': 0,
+  //       'commentCnt': 0,
+  //     });
+  //   } catch (e) {
+  //     print("Error posting data: $e");
+  //   } finally {
+  //     setState(() {
+  //       showSpinner = false;
+  //     });
+  //   }
+  // }
   void _sendPost() async {
     setState(() {
       showSpinner = true;
     });
     try {
       List<String> imageUrls = await uploadImages();
-      FirebaseFirestore.instance.collection('board').add({
-        'userId': uid,
-        'body': _bodyController.text,
-        'uploadImageUrls': imageUrls,
-        'createdAt': DateTime.now(),
-        'likeCnt': 0,
-        'commentCnt': 0,
-      });
+
+      final postService = ref.read(postServiceProvider);
+
+      final postRequest = PostRequest(
+        content: _bodyController.text,
+      );
+
+      await postService.createPost(postRequest);
+
+      ref.invalidate(postListProvider);
+
+
+
     } catch (e) {
       print("Error posting data: $e");
     } finally {

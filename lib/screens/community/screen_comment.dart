@@ -14,7 +14,7 @@ class CommentScreen extends StatefulWidget {
   const CommentScreen(
       {Key? key, required this.boardId, required this.postedUid})
       : super(key: key);
-  final String? boardId;
+  final int boardId;
   final String postedUid;
 
   @override
@@ -31,8 +31,8 @@ class _CommentScreenState extends State<CommentScreen> {
   void initState() {
     super.initState();
     getCurrentUserUid();
-    _postWithUserDetails = _fetchPostWithUserData(widget.boardId!);
-    _commentsWithUserDetails = fetchCommentsWithUserDataStream(widget.boardId!);
+    _postWithUserDetails = _fetchPostWithUserData(widget.boardId! as String);
+    _commentsWithUserDetails = fetchCommentsWithUserDataStream(widget.boardId! as String);
     _scrollController.addListener(_scrollListener);
   }
 
@@ -161,7 +161,7 @@ class _CommentScreenState extends State<CommentScreen> {
         .collection('comments')
         .doc('${widget.boardId}_$timestamp');
     DocumentReference boardRef =
-        FirebaseFirestore.instance.collection('board').doc(widget.boardId);
+        FirebaseFirestore.instance.collection('board').doc(widget.boardId as String?);
 
     FirebaseFirestore.instance.runTransaction((transaction) async {
       // 게시물 문서를 먼저 읽어옵니다.
@@ -371,7 +371,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                               onPressed: () {
                                                 FirebaseFirestore.instance
                                                     .collection('board')
-                                                    .doc(widget.boardId)
+                                                    .doc(widget.boardId as String?)
                                                     .delete();
                                               },
                                               child: Text(
@@ -496,7 +496,7 @@ class _CommentScreenState extends State<CommentScreen> {
                       bottom: 0,
                       child: StreamBuilder<List<Map<String, dynamic>>>(
                         stream:
-                            fetchCommentsWithUserDataStream(widget.boardId!),
+                            fetchCommentsWithUserDataStream(widget.boardId! as String),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
